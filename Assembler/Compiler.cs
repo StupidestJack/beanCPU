@@ -18,7 +18,11 @@ namespace Assembler
             { "ST",        0x05 }, // mem[mem[pc++]] = reg[idx] (含 MMIO 繪圖)
             { "JMP",       0x06 }, // pc = mem[pc]
             { "JZ",        0x07 }, // if (reg == 0) pc = mem[pc]
-            { "PRINT_STR", 0x08 }  // 從 mem[pc++] 位址印出字串
+            { "PRINT_STR", 0x08 },  // 從 mem[pc++] 位址印出字串
+            { "PUSH",      0x09 }, // 0x09 [RegIdx]
+            { "POP",       0x0A }, // 0x0A [RegIdx]
+            { "CALL",      0x0B }, // 0x0B [Addr]
+            { "RET",       0x0C }  // 0x0C
         };
 
         public static ushort[] Compile(string source)
@@ -88,7 +92,7 @@ namespace Assembler
 
                 // 處理後續的運算元 (數值、位址或第二個暫存器索引)
                 // 豆子的架構中，ADD/SUB 的第二個參數是存放在記憶體中的「暫存器索引」
-                for (int i = (opName == "JMP" || opName == "PRINT_STR" ? 1 : 2); i < parts.Length; i++)
+                for (int i = (opName == "JMP" || opName == "PRINT_STR" || opName == "CALL" ? 1 : 2); i < parts.Length; i++)
                 {
                     string p = parts[i].ToUpper();
                     if (p.StartsWith("R"))
@@ -124,6 +128,9 @@ namespace Assembler
             switch (op)
             {
                 case "BRK":
+                case "RET":   
+                case "PUSH":  
+                case "POP":   
                     return 1; // 僅有 (0x00 << 8 | 0)
                 case "MOV":
                 case "ADD":
@@ -133,6 +140,7 @@ namespace Assembler
                 case "JMP":
                 case "JZ":
                 case "PRINT_STR":
+                case "CALL":
                     return 2; // 操作碼 + 一個隨後的數值/位址/暫存器索引
                 default:
                     return 1;
