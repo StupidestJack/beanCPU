@@ -20,6 +20,8 @@ namespace AsmEmuShort
             Console.SetCursorPosition(0, 0);
 
             int startAddr = page * 256;
+            Console.WriteLine($" R0: {cpu.reg[0]} | R1: {cpu.reg[1]} | R2: {cpu.reg[2]} R3: {cpu.reg[3]} " +
+                $"R4: {cpu.reg[4]} R5: {cpu.reg[5]} R6: {cpu.reg[6]} R7: {cpu.reg[7]}");
             Console.WriteLine($"--- Memory Monitor [Page: {page:X2}/FF] | PC: {cpu.pc:X4} | POW: {(cpu.running ? "TRUE" : "FALSE" )} ---");
             Console.WriteLine("Addr | 00 01 02 03 04 05 06 07 | 08 09 0A 0B 0C 0D 0E 0F");
             Console.WriteLine("---------------------------------------------------------");
@@ -63,6 +65,7 @@ namespace AsmEmuShort
         [STAThread]
         static void Main(string[] args)
         {
+            Console.CursorVisible = false;
             int currentPage = 0;
 
             // 1. 啟動 Console 監視器執行緒
