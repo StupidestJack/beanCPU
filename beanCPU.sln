@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsmEmuShort", "AsmEmuShort\AsmEmuShort.csproj", "{AEA980D7-FA76-4C27-9A9C-5BC4DF28C387}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembler", "Assembler\Assembler.csproj", "{BEF04795-508A-4F39-8668-856D51D8A4A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEA980D7-FA76-4C27-9A9C-5BC4DF28C387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA980D7-FA76-4C27-9A9C-5BC4DF28C387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA980D7-FA76-4C27-9A9C-5BC4DF28C387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA980D7-FA76-4C27-9A9C-5BC4DF28C387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEF04795-508A-4F39-8668-856D51D8A4A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF04795-508A-4F39-8668-856D51D8A4A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEF04795-508A-4F39-8668-856D51D8A4A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEF04795-508A-4F39-8668-856D51D8A4A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D279C5F4-CE84-4DAB-8E87-8D51755EE8FD}
+	EndGlobalSection
+EndGlobal

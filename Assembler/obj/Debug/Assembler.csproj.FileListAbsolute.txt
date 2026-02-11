@@ -1,0 +1,7 @@
+D:\Program Projects\CSharp\beanCPU\Assembler\bin\Debug\Assembler.exe.config
+D:\Program Projects\CSharp\beanCPU\Assembler\bin\Debug\Assembler.exe
+D:\Program Projects\CSharp\beanCPU\Assembler\bin\Debug\Assembler.pdb
+D:\Program Projects\CSharp\beanCPU\Assembler\obj\Debug\Assembler.csproj.AssemblyReference.cache
+D:\Program Projects\CSharp\beanCPU\Assembler\obj\Debug\Assembler.csproj.CoreCompileInputs.cache
+D:\Program Projects\CSharp\beanCPU\Assembler\obj\Debug\Assembler.exe
+D:\Program Projects\CSharp\beanCPU\Assembler\obj\Debug\Assembler.pdb

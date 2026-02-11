@@ -1,0 +1,7 @@
+D:\Program Projects\CSharp\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.exe.config
+D:\Program Projects\CSharp\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.exe
+D:\Program Projects\CSharp\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.pdb
+D:\Program Projects\CSharp\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.AssemblyReference.cache
+D:\Program Projects\CSharp\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.CoreCompileInputs.cache
+D:\Program Projects\CSharp\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.exe
+D:\Program Projects\CSharp\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.pdb
