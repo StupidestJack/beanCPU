@@ -19,3 +19,10 @@ C:\Users\femboy\source\repos\StupidestJack\beanCPU\Assembler\obj\Debug\Assembler
 C:\Users\femboy\source\repos\StupidestJack\beanCPU\Assembler\obj\Debug\Assembler.csproj.CoreCompileInputs.cache
 C:\Users\femboy\source\repos\StupidestJack\beanCPU\Assembler\obj\Debug\Assembler.exe
 C:\Users\femboy\source\repos\StupidestJack\beanCPU\Assembler\obj\Debug\Assembler.pdb
+E:\Collaborative\beanCPU\Assembler\bin\Debug\Assembler.exe.config
+E:\Collaborative\beanCPU\Assembler\bin\Debug\Assembler.exe
+E:\Collaborative\beanCPU\Assembler\bin\Debug\Assembler.pdb
+E:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.csproj.AssemblyReference.cache
+E:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.csproj.CoreCompileInputs.cache
+E:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.exe
+E:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.pdb

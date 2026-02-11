@@ -19,3 +19,10 @@ C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuS
 C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.CoreCompileInputs.cache
 C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.exe
 C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.pdb
+E:\Collaborative\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.exe.config
+E:\Collaborative\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.exe
+E:\Collaborative\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.pdb
+E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.AssemblyReference.cache
+E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.CoreCompileInputs.cache
+E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.exe
+E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.pdb

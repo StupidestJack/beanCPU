@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,7 +37,7 @@ namespace Assembler
             var preProcessed = new List<string>();
             foreach (var rawLine in lines)
             {
-                var line = rawLine.Split(new[] { "//" }, StringSplitOptions.None)[0].Trim();
+                var line = rawLine.Split(new[] { ';' }, StringSplitOptions.None)[0].Trim();
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
                 if (line.ToUpper().StartsWith("DEFINE"))
