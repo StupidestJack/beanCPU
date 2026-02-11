@@ -12,3 +12,10 @@ C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\
 C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.exe
 C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.pdb
+C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.exe.config
+C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.exe
+C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.pdb
+C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.AssemblyReference.cache
+C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.CoreCompileInputs.cache
+C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.exe
+C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.pdb

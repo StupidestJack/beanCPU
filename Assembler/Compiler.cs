@@ -19,10 +19,10 @@ namespace Assembler
             { "JMP",       0x06 }, // pc = mem[pc]
             { "JZ",        0x07 }, // if (reg == 0) pc = mem[pc]
             { "PRINT_STR", 0x08 },  // 從 mem[pc++] 位址印出字串
-            { "PUSH",      0x09 }, // 0x09 [RegIdx]
-            { "POP",       0x0A }, // 0x0A [RegIdx]
-            { "CALL",      0x0B }, // 0x0B [Addr]
-            { "RET",       0x0C }  // 0x0C
+            { "PUSH",      0x09 }, // mem[--SP] = reg[idx]
+            { "POP",       0x0A }, // reg[idx] = mem[SP++]
+            { "CALL",      0x0B }, // pc = mem[pc] mem[--SP] = pc + 2
+            { "RET",       0x0C }  // pc = mem[SP++]
         };
 
         public static ushort[] Compile(string source)
