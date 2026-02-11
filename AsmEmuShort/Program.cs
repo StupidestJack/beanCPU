@@ -95,7 +95,13 @@ namespace AsmEmuShort
                     }
                     cpu.write(translated);
                 }
+                try
+                {
+                    cpu.tick = int.Parse(args[1]);
+                }
+                catch { }
             }
+            
             else if (File.Exists("code.dat"))
             {
                 byte[] raw = File.ReadAllBytes("code.dat");

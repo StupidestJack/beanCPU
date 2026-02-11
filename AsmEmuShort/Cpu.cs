@@ -13,10 +13,11 @@
             public ushort pc = 0;
             public ushort sp = 0xFFFF; //stack pointer
             public bool running = false;
+            public int tick = 200;
             public monitor BoundScreen;
             public void run()
             {
-                running = true;
+                running = true; 
                 //ushort val;
                 while (running)
                 {
@@ -60,10 +61,11 @@
                             pc = target; // 跳轉
                             break;
                         case 0x0C:
-                                pc = mem[sp++];
-                                break;
+                            pc = mem[sp++];
+                            break;
                     }
-                    System.Threading.Thread.Sleep(300);
+                    if (tick > 0) System.Threading.Thread.Sleep(tick);
+                    else System.Threading.Thread.Yield();
                 }
             }
             public void write(ushort[] code)

@@ -5,3 +5,10 @@ D:\Program Projects\CSharp\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.Asse
 D:\Program Projects\CSharp\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.CoreCompileInputs.cache
 D:\Program Projects\CSharp\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.exe
 D:\Program Projects\CSharp\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.pdb
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.exe.config
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.exe
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.pdb
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.exe
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.pdb

@@ -5,3 +5,10 @@ D:\Program Projects\CSharp\beanCPU\Assembler\obj\Debug\Assembler.csproj.Assembly
 D:\Program Projects\CSharp\beanCPU\Assembler\obj\Debug\Assembler.csproj.CoreCompileInputs.cache
 D:\Program Projects\CSharp\beanCPU\Assembler\obj\Debug\Assembler.exe
 D:\Program Projects\CSharp\beanCPU\Assembler\obj\Debug\Assembler.pdb
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\Assembler\bin\Debug\Assembler.exe.config
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\Assembler\bin\Debug\Assembler.exe
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\Assembler\bin\Debug\Assembler.pdb
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\Assembler\obj\Debug\Assembler.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\Assembler\obj\Debug\Assembler.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\Assembler\obj\Debug\Assembler.exe
+C:\Users\Administrator\source\repos\StupidestJack\beanCPU\Assembler\obj\Debug\Assembler.pdb
