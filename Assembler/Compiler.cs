@@ -86,6 +86,7 @@ namespace Assembler
                 // 如果指令有參數且第一個參數是暫存器 (例如 MOV R0, 65)
                 if (parts.Length > 1 && parts[1].ToUpper().StartsWith("R"))
                 {
+                    // 語法糖，用於 MOV Rn, Rm
                     if (opName == "MOV" && parts.Length > 2 && parts[2].ToUpper().StartsWith("R"))
                     {
                         // 正確解析第一個和第二個暫存器編號
