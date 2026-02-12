@@ -84,6 +84,25 @@ namespace Assembler
                 // 如果指令有參數且第一個參數是暫存器 (例如 MOV R0, 65)
                 if (parts.Length > 1 && parts[1].ToUpper().StartsWith("R"))
                 {
+                    if (opName == "MOV" && parts.Length > 2 && parts[2].ToUpper().StartsWith("R"))
+                    {
+                        // 正確解析第一個和第二個暫存器編號
+                        byte rd;
+                        byte.TryParse(parts[1].Substring(1), out rd);
+                        byte rs;
+                        byte.TryParse(parts[2].Substring(1), out rs);
+
+                        // SUB Rd, Rd
+                        finalCode.Add((ushort)((0x03 << 8) | rd));
+                        finalCode.Add(rd);
+
+                        // ADD Rd, Rs
+                        finalCode.Add((ushort)((0x02 << 8) | rd));
+                        finalCode.Add(rs);
+
+                        continue; // 跳過原本的 MOV 處理
+                    }
+
                     byte.TryParse(parts[1].ToUpper().Substring(1), out regIdx);
                 }
 

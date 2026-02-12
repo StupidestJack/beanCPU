@@ -26,3 +26,12 @@ E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.AssemblyRefere
 E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.CoreCompileInputs.cache
 E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.exe
 E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.pdb
+D:\Collaborative\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.exe.config
+D:\Collaborative\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.exe
+D:\Collaborative\beanCPU\AsmEmuShort\bin\Debug\AsmEmuShort.pdb
+D:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.AssemblyReference.cache
+D:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.monitor.resources
+D:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.GenerateResource.cache
+D:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.CoreCompileInputs.cache
+D:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.exe
+D:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.pdb

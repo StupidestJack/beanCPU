@@ -15,3 +15,10 @@
 # 作業系統暫存
 Thumbs.db
 .DS_Store
+/AsmEmuShort/obj/Debug/AsmEmuShort.csproj.CoreCompileInputs.cache
+/AsmEmuShort/obj/Debug/AsmEmuShort.csproj.CoreCompileInputs.cache
+/AsmEmuShort/obj/Debug/AsmEmuShort.csproj.FileListAbsolute.txt
+*.resources
+/AsmEmuShort/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/AsmEmuShort/obj/Debug/AsmEmuShort.csproj.GenerateResource.cache
+/Assembler/obj/Debug/Assembler.csproj.FileListAbsolute.txt

@@ -26,3 +26,10 @@ E:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.csproj.AssemblyReference.
 E:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.csproj.CoreCompileInputs.cache
 E:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.exe
 E:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.pdb
+D:\Collaborative\beanCPU\Assembler\bin\Debug\Assembler.exe.config
+D:\Collaborative\beanCPU\Assembler\bin\Debug\Assembler.exe
+D:\Collaborative\beanCPU\Assembler\bin\Debug\Assembler.pdb
+D:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.csproj.AssemblyReference.cache
+D:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.csproj.CoreCompileInputs.cache
+D:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.exe
+D:\Collaborative\beanCPU\Assembler\obj\Debug\Assembler.pdb
