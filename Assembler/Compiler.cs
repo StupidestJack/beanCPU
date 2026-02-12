@@ -18,11 +18,13 @@ namespace Assembler
             { "ST",        0x05 }, // mem[mem[pc++]] = reg[idx] (含 MMIO 繪圖)
             { "JMP",       0x06 }, // pc = mem[pc]
             { "JZ",        0x07 }, // if (reg == 0) pc = mem[pc]
-            { "PRINT_STR", 0x08 },  // 從 mem[pc++] 位址印出字串
+            { "PRINT_STR", 0x08 }, // 從 mem[pc++] 位址印出字串
             { "PUSH",      0x09 }, // mem[--SP] = reg[idx]
             { "POP",       0x0A }, // reg[idx] = mem[SP++]
             { "CALL",      0x0B }, // pc = mem[pc] mem[--SP] = pc + 2
-            { "RET",       0x0C }  // pc = mem[SP++]
+            { "RET",       0x0C }, // pc = mem[SP++]
+            { "MUL",       0x0D }, // reg[idx] *= reg[mem[pc++]]
+            { "DIV",       0x0E }  // reg[idx] /= reg[mem[pc++]]
         };
 
         public static ushort[] Compile(string source)
@@ -135,6 +137,8 @@ namespace Assembler
                 case "MOV":
                 case "ADD":
                 case "SUB":
+                case "MUL":
+                case "DIV":
                 case "LD":
                 case "ST":
                 case "JMP":
