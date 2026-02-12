@@ -26,3 +26,5 @@ E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.AssemblyRefere
 E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.CoreCompileInputs.cache
 E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.exe
 E:\Collaborative\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.pdb
+C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.monitor.resources
+C:\Users\femboy\source\repos\StupidestJack\beanCPU\AsmEmuShort\obj\Debug\AsmEmuShort.csproj.GenerateResource.cache
