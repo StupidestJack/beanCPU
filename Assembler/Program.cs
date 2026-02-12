@@ -9,14 +9,14 @@ namespace Assembler
     {
         static void Main(string[] args)
         {
-            if (args.Length < 2)
+            if (args.Length < 1)
             {
-                Console.WriteLine("請輸入組語檔案名稱與輸出方式 (例如: Assembler.exe test.asm test.bin)");
+                Console.WriteLine("請輸入組語檔案名稱與輸出方式 (例如: Assembler.exe test.asm test.bin)\r\n或者只輸入檔案名稱，將儲存為{檔案名稱.bin}並保留原副檔名。如test.asm.bin。");
                 return;
             }
 
             string sourcePath = args[0];
-            string binPath = args[1];
+            string binPath = args.Length < 1 ? args[0] + ".bin" : args[1];
 
             // --- 1. 讀取現有二進位檔（大端序） ---
             ushort[] originalBinary = Array.Empty<ushort>();
