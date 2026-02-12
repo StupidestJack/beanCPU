@@ -18,9 +18,14 @@ namespace AsmEmuShort
         }
         public void print(char c)
         {
-            richTextBox1.AppendText(c.ToString());
+            label1.Text += c;
         }
         private void monitor_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
