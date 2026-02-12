@@ -54,7 +54,7 @@ namespace Assembler
             }
 
             // --- 3. 寫入二進位檔（大端序） ---
-            if (compileSuccess && newBinary.Length > 0)
+            if (compileSuccess && newBinary.Length > 0 && !newBinary.SequenceEqual(originalBinary))
             {
                 List<byte> output = new List<byte>();
                 foreach (ushort value in newBinary)
