@@ -170,19 +170,28 @@ namespace AsmEmuShort
 
             foreach (char c in screenBuffer)
             {
-                if (asciifont.ContainsKey(c))
+                char displayChar = asciifont.ContainsKey(c) ? c : '?';
+                byte[] data = asciifont[displayChar];
+                if (c == '\n') // 換行
                 {
-                    byte[] data = asciifont[c];
-                    for (int col = 0; col < 5; col++) // 走訪 5 列
+                    x = 10;
+                    y += charHeight * 2;
+                    continue;
+                }
+                if (c == '\r') // 回到行首
+                {
+                    x = 10;
+                    continue;
+                }
+                for (int col = 0; col < 5; col++) // 走訪 5 列
+                {
+                    for (int row = 0; row < 8; row++) // 走訪 8 行
                     {
-                        for (int row = 0; row < 8; row++) // 走訪 8 行
+                        // 檢查該位元是否為 1 (由下往上推的邏輯)
+                        if ((data[col] & (1 << row)) != 0)
                         {
-                            // 檢查該位元是否為 1 (由下往上推的邏輯)
-                            if ((data[col] & (1 << row)) != 0)
-                            {
-                                // 畫出像素方塊 (放大倍率可以自己調，這裡設為 2x2)
-                                g.FillRectangle(Brushes.White, x + col * 2, y + row * 2, 2, 2);
-                            }
+                            // 畫出像素方塊 (放大倍率可以自己調，這裡設為 2x2)
+                            g.FillRectangle(Brushes.White, x + col * 2, y + row * 2, 2, 2);
                         }
                     }
                 }

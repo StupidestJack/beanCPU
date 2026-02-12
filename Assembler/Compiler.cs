@@ -150,9 +150,9 @@ namespace Assembler
             switch (op)
             {
                 case "BRK":
-                case "RET":   
-                case "PUSH":  
-                case "POP":   
+                case "RET":
+                case "PUSH":
+                case "POP":
                     return 1; // 僅有 (0x00 << 8 | 0)
                 case "MOV":
                 case "ADD":
