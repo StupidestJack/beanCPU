@@ -124,12 +124,8 @@ namespace AsmEmuShort
                     0x0063,0x006F,0x0064,0x0065,0x002E,0x0064,0x0061,0x0074,0x007E
                 });
             }
-            cpu.BoundScreen = new monitor();
-            Task.Run(() =>
-            {
-                cpu.run();
-            });
             Application.Run(cpu.BoundScreen);
+            //Application.Run(cpu.BoundScreen);
         }
     }
 }

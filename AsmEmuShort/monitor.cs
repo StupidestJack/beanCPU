@@ -16,10 +16,6 @@ namespace AsmEmuShort
         {
             InitializeComponent();
         }
-        private void monitor_Load(object sender, EventArgs e)
-        {
-
-        }
 
         // 在 monitor 類別內加入
         private List<char> screenBuffer = new List<char>();
@@ -28,11 +24,6 @@ namespace AsmEmuShort
         public void printString(string s)
         {
             label1.Text += s; // 或加入你們的點陣 screenBuffer
-        }
-        public void print(char c)
-        {
-            screenBuffer.Add(c);
-            this.Invalidate(); // 強制觸發 panel1_Paint 重新繪圖
         }
         public Dictionary<char, byte[]> asciifont = new Dictionary<char, byte[]>
         {
@@ -132,6 +123,43 @@ namespace AsmEmuShort
             { '}', new byte[] { 0x81, 0x81, 0x76, 0x08, 0x00 } },
             { '~', new byte[] { 0x06, 0x01, 0x02, 0x04, 0x03 } }
         };
+        // 在 monitor.cs 類別內加入
+        // --- monitor.cs ---
+        private void monitor_Load(object sender, EventArgs e)
+        {
+            // 當視窗完全顯示在螢幕上後，才叫 CPU 開始跑，保證 ST 指令不漏接
+            Task.Run(() => {
+                Program.cpu.run();
+            });
+        }
+
+        public void print(char c)
+        {
+            screenBuffer.Add(c);
+            // 核心修正：叫 panel1 重畫，而不是叫 Form 重畫
+            if (panel1.InvokeRequired)
+            {
+                panel1.Invoke(new Action(() => {
+                    panel1.Invalidate();
+                    panel1.Update(); // 強制立刻重畫，不准排隊
+                }));
+            }
+            else
+            {
+                panel1.Invalidate();
+                panel1.Update();
+            }
+        }
+
+        // printRange 也要改
+        public void printRange(string text)
+        {
+            foreach (char c in text) screenBuffer.Add(c);
+            panel1.Invoke(new Action(() => {
+                panel1.Invalidate();
+                panel1.Update();
+            }));
+        }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;

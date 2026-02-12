@@ -14,9 +14,10 @@
             public ushort sp = 0xFFFF; //stack pointer
             public bool running = false;
             public int tick = 200;
-            public monitor BoundScreen;
-        
-        public void run()
+            public monitor BoundScreen = new monitor();
+            private System.Text.StringBuilder ioBuffer = new System.Text.StringBuilder();
+
+            public void run()
             {
                 running = true; 
                 ushort val;
@@ -32,21 +33,19 @@
                         case 0x02: reg[idx] += reg[mem[pc++]]; break; //ADD
                         case 0x03: reg[idx] -= reg[mem[pc++]]; break; //SUB
                         case 0x04: reg[idx] = mem[mem[pc++]]; break; //LD
-                        case 0x05: // ST + MMIO
+                        case 0x05: // ST
                             ushort targetAddr = mem[pc++];
                             mem[targetAddr] = reg[idx];
 
                             if (targetAddr == 0xFF00)
                             {
-                                // 核心修正：檢查 BoundScreen 是否存在且 Handle 是否已建立
+                                Console.WriteLine($"DEBUG: IMMEDIATE PRINT - DATA: {reg[idx]:X4}");
                                 if (BoundScreen != null && BoundScreen.IsHandleCreated)
                                 {
-                                    BoundScreen.Invoke(new Action(() => BoundScreen.print((char)reg[idx])));
+                                    // 直接呼叫 print，不要累積在 buffer
+                                    char c = (char)reg[idx];
+                                    BoundScreen.Invoke(new Action(() => BoundScreen.print(c)));
                                 }
-                            }
-                            else if (targetAddr == 0xFF01)
-                            {
-                                Console.Write(reg[idx]);
                             }
                             break;
                         case 0x06: pc = mem[pc++]; break; // 讀取位址參數並直接跳轉
@@ -56,19 +55,15 @@
                             break; // 3. 如果條件不成立，pc 已經在正確的下一行，直接結束！
                         case 0x08:
                             ushort strAddr = mem[pc++];
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
                             while (mem[strAddr] != 0x00)
                             {
-                                char c = (char)mem[strAddr++];
-                                // 增加 IsHandleCreated 檢查
-                                if (BoundScreen != null && BoundScreen.IsHandleCreated)
-                                {
-                                    BoundScreen.Invoke(new Action(() => BoundScreen.print(c)));
-                                }
-                                else
-                                {
-                                    // 如果視窗還沒好，稍微等一下，不要讓 CPU 空轉燒毀 Handle 建立過程
-                                    System.Threading.Thread.Sleep(10);
-                                }
+                                sb.Append((char)mem[strAddr++]);
+                            }
+                            if (BoundScreen != null && BoundScreen.IsHandleCreated)
+                            {
+                                string finalStr = sb.ToString();
+                                BoundScreen.Invoke(new Action(() => BoundScreen.printRange(finalStr)));
                             }
                             break;
                         // POP / PUSH
