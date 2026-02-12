@@ -11,7 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DE009026-14F0-4D34-A115-3201820174C1}"
 	ProjectSection(SolutionItems) = preProject
-		dirc.txt = dirc.txt
+		dict.txt = dict.txt
+		sugar.txt = sugar.txt
 	EndProjectSection
 EndProject
 Global

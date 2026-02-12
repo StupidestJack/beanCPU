@@ -100,9 +100,9 @@ namespace AsmEmuShort
                 catch { }
             }
             
-            else if (File.Exists("code.dat"))
+            else if (File.Exists("code.bin"))
             {
-                byte[] raw = File.ReadAllBytes("code.dat");
+                byte[] raw = File.ReadAllBytes("code.bin");
                 ushort[] translated = new ushort[raw.Length / 2];
                 for (int i = 0; i < translated.Length; i++)
                 {
@@ -121,7 +121,7 @@ namespace AsmEmuShort
                     0x0077,0x0069,0x0074,0x0068,0x0020,
                     0x0061,0x0072,0x0067,0x0075,0x006D,0x0065,0x006E,0x0074,0x0020,
                     0x006F,0x0072,0x0020,
-                    0x0063,0x006F,0x0064,0x0065,0x002E,0x0064,0x0061,0x0074,0x007E
+                    0x0063,0x006F,0x0064,0x0065,0x002E,0x0062,0x0069,0x006e,0x007E
                 });
             }
             Application.Run(cpu.BoundScreen);
