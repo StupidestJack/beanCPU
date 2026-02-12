@@ -18,7 +18,7 @@
             public void run()
             {
                 running = true; 
-                //ushort val;
+                ushort val;
                 while (running)
                 {
                     ushort instruction = mem[pc++];
@@ -37,37 +37,40 @@
                             if (targetAddr == 0xFF00) BoundScreen?.Invoke(new Action(() => BoundScreen.print((char)reg[idx])));
                             else if (targetAddr == 0xFF01) Console.Write(reg[idx]);
                             break;
-                        case 0x06: pc = mem[pc]; break; //JMP
-                        case 0x07: pc = (ushort)((reg[idx] == 0) ? mem[pc] : pc + 1); break; //JZ
+                        case 0x06: pc = mem[pc++]; break; // 讀取位址參數並直接跳轉
+                        case 0x07: // JZ
+                            val = mem[pc++]; // 1. 直接讀取參數並把 pc 移到下一個指令起始點
+                            if (reg[idx] == 0) pc = val; // 2. 如果條件成立，直接覆蓋 pc
+                            break; // 3. 如果條件不成立，pc 已經在正確的下一行，直接結束！
                         case 0x08: //PRINT_STR
-                            ushort strAddr = mem[pc++];
-                            while (mem[strAddr] != 0x00)
-                            {
-                                char c = (char)mem[strAddr++];
-                                BoundScreen?.Invoke(new Action(() => BoundScreen.print(c)));
-                            }
-                            break;
-                        // POP / PUSH
-                        case 0x09:
-                            mem[--sp] = reg[idx];
-                            break;
-                        case 0x0A:
-                            reg[idx] = mem[sp++];
-                            break;
-                        // CALL / RET
-                        case 0x0B:
-                            ushort target = mem[pc]; // 先讀取目標跳轉位址
-                            mem[--sp] = (ushort)(pc + 1); // 存入「參數之後」的位址，這樣 RET 才是回到下一行指令
-                            pc = target; // 跳轉
-                            break;
-                        case 0x0C:
-                            pc = mem[sp++];
-                            break;
+                                ushort strAddr = mem[pc++];
+                                while (mem[strAddr] != 0x00)
+                                {
+                                    char c = (char)mem[strAddr++];
+                                    BoundScreen?.Invoke(new Action(() => BoundScreen.print(c)));
+                                }
+                                break;
+                            // POP / PUSH
+                            case 0x09:
+                                mem[--sp] = reg[idx];
+                                break;
+                            case 0x0A:
+                                reg[idx] = mem[sp++];
+                                break;
+                            // CALL / RET
+                            case 0x0B:
+                                val = mem[pc++]; // 先讀取目標跳轉位址
+                                mem[--sp] = pc; // 存入「參數之後」的位址，這樣 RET 才是回到下一行指令
+                                pc = val; // 跳轉
+                                break;
+                            case 0x0C:
+                                pc = mem[sp++];
+                                break;
+                        }
+                        if (tick > 0) System.Threading.Thread.Sleep(tick);
+                        else System.Threading.Thread.Yield();
                     }
-                    if (tick > 0) System.Threading.Thread.Sleep(tick);
-                    else System.Threading.Thread.Yield();
                 }
-            }
             public void write(ushort[] code)
             {
                 for (int i = 0; i < code.Length; i++)
