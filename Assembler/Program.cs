@@ -16,7 +16,15 @@ namespace Assembler
             }
 
             string sourcePath = args[0];
-            string binPath = args.Length < 1 ? args[0] + ".bin" : args[1];
+            string binPath;
+            if (args.Length >= 2)
+            {
+                binPath = args[1];
+            }
+            else
+            {
+                binPath = sourcePath + ".bin";
+            }
 
             // --- 1. 讀取現有二進位檔（大端序） ---
             ushort[] originalBinary = Array.Empty<ushort>();
