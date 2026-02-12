@@ -123,6 +123,44 @@ namespace AsmEmuShort
             { '}', new byte[] { 0x81, 0x81, 0x76, 0x08, 0x00 } },
             { '~', new byte[] { 0x06, 0x01, 0x02, 0x04, 0x03 } }
         };
+        Dictionary<Keys, byte> keyValuePairs = new Dictionary<Keys, byte>
+        {
+            // 數字區 (0-9)
+            { Keys.D0, 48 }, { Keys.D1, 49 }, { Keys.D2, 50 }, { Keys.D3, 51 }, { Keys.D4, 52 },
+            { Keys.D5, 53 }, { Keys.D6, 54 }, { Keys.D7, 55 }, { Keys.D8, 56 }, { Keys.D9, 57 },
+
+            // 大寫字母區 (A-Z) - 注意：若要區分大小寫，通常需偵測 Shift 鍵狀態，這裡先給標準大寫
+            { Keys.A, 65 }, { Keys.B, 66 }, { Keys.C, 67 }, { Keys.D, 68 }, { Keys.E, 69 },
+            { Keys.F, 70 }, { Keys.G, 71 }, { Keys.H, 72 }, { Keys.I, 73 }, { Keys.J, 74 },
+            { Keys.K, 75 }, { Keys.L, 76 }, { Keys.M, 77 }, { Keys.N, 78 }, { Keys.O, 79 },
+            { Keys.P, 80 }, { Keys.Q, 81 }, { Keys.R, 82 }, { Keys.S, 83 }, { Keys.T, 84 },
+            { Keys.U, 85 }, { Keys.V, 86 }, { Keys.W, 87 }, { Keys.X, 88 }, { Keys.Y, 89 }, { Keys.Z, 90 },
+
+            // 控制鍵
+            { Keys.Enter, 13 },    // \r (回車)
+            { Keys.Space, 32 },    // 空格
+            { Keys.Back, 8 },      // Backspace (退格)
+            { Keys.Escape, 27 },   // ESC
+            { Keys.Tab, 9 },       // Tab
+
+            // 基本符號
+            { Keys.OemPeriod, 46 },    // .
+            { Keys.Oemcomma, 44 },     // ,
+            { Keys.OemQuestion, 47 },  // /
+            { Keys.OemMinus, 45 },     // -
+            { Keys.Oemplus, 61 },      // = (未按下 Shift 時)
+    
+            // 九宮格數字鍵 (Numpad)
+            { Keys.NumPad0, 48 }, { Keys.NumPad1, 49 }, { Keys.NumPad2, 50 },
+            { Keys.NumPad3, 51 }, { Keys.NumPad4, 52 }, { Keys.NumPad5, 53 },
+            { Keys.NumPad6, 54 }, { Keys.NumPad7, 55 }, { Keys.NumPad8, 56 }, { Keys.NumPad9, 57 },
+
+            // 上下左右方向鍵
+            { Keys.Up,    17 }, // 或使用 11 (VT)
+            { Keys.Down,  18 }, // 或使用 12 (FF)
+            { Keys.Left,  19 }, // 或使用 20 (DC4)
+            { Keys.Right, 20 },
+        };
         // 在 monitor.cs 類別內加入
         // --- monitor.cs ---
         private void monitor_Load(object sender, EventArgs e)
@@ -197,6 +235,15 @@ namespace AsmEmuShort
                 }
                 x += charWidth * 2; // 移動到下一個字元位置
                 if (x > this.Width - 20) { x = 10; y += charHeight * 2; } // 簡易換行
+            }
+        }
+
+        private void monitor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Program.cpu.running && keyValuePairs.ContainsKey(e.KeyCode))
+            {
+                Program.cpu.mem[0xFF10] = keyValuePairs.ContainsKey(e.KeyCode) ? keyValuePairs[e.KeyCode] : (byte)0;
+                Program.cpu.mem[0xFF11] = 1; // 按鍵狀態：1 = 按下，0 = 放開 ... 尼瑪IntelliCode會讀心術
             }
         }
     }

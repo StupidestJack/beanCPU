@@ -64,6 +64,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "monitor";
             this.Load += new System.EventHandler(this.monitor_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.monitor_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
