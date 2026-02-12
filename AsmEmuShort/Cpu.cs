@@ -16,7 +16,7 @@
             public int tick = 200;
             public monitor BoundScreen = new monitor();
             private System.Text.StringBuilder ioBuffer = new System.Text.StringBuilder();
-
+            
             public void run()
             {
                 running = true; 

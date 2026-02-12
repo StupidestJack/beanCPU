@@ -173,6 +173,7 @@ namespace AsmEmuShort
 
         public void print(char c)
         {
+            
             screenBuffer.Add(c);
             // 核心修正：叫 panel1 重畫，而不是叫 Form 重畫
             if (panel1.InvokeRequired)
