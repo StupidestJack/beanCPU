@@ -39,8 +39,11 @@
 
                             if (targetAddr == 0xFF00)
                             {
-                                Console.WriteLine($"DEBUG: IMMEDIATE PRINT - DATA: {reg[idx]:X4}");
-                                if (BoundScreen != null && BoundScreen.IsHandleCreated)
+                            // 只讓DEBUG資訊在DEBUG模式下顯示
+#if DEBUG
+                            Console.WriteLine($"DEBUG: IMMEDIATE PRINT - DATA: {reg[idx]:X4}");
+#endif
+                            if (BoundScreen != null && BoundScreen.IsHandleCreated)
                                 {
                                     // 直接呼叫 print，不要累積在 buffer
                                     char c = (char)reg[idx];
