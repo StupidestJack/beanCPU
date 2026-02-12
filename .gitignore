@@ -22,3 +22,5 @@ Thumbs.db
 /AsmEmuShort/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /AsmEmuShort/obj/Debug/AsmEmuShort.csproj.GenerateResource.cache
 /Assembler/obj/Debug/Assembler.csproj.FileListAbsolute.txt
+/Assembler/obj/Debug
+/AsmEmuShort/obj/Debug
