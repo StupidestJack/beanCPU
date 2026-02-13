@@ -173,8 +173,15 @@ namespace AsmEmuShort
 
         public void print(char c)
         {
-            
-            screenBuffer.Add(c);
+
+            if (c == '\b') // Backspace
+            {
+                if (screenBuffer.Count > 0)
+                {
+                    screenBuffer.RemoveAt(screenBuffer.Count - 1); // 刪掉最後一個字
+                }
+            }
+            else { screenBuffer.Add(c); }
             // 核心修正：叫 panel1 重畫，而不是叫 Form 重畫
             if (panel1.InvokeRequired)
             {
