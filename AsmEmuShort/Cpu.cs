@@ -55,10 +55,13 @@
                         case 0x08:
                             ushort strAddr = mem[pc++];
                             System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                            while (mem[strAddr] != 0x00)
+                            int safetyCounter = 0; // 新增安全計數器
+                            while (mem[strAddr] != 0x00 && safetyCounter < 256) // 限制字串長度
                             {
                                 sb.Append((char)mem[strAddr++]);
+                                safetyCounter++;
                             }
+                            // ... 剩下的 Invoke 邏輯 ...
                             if (BoundScreen != null && BoundScreen.IsHandleCreated)
                             {
                                 string finalStr = sb.ToString();

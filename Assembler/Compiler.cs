@@ -78,6 +78,15 @@ namespace Assembler
             {
                 var parts = line.Split(new[] { ' ', ',', '\t' }, StringSplitOptions.RemoveEmptyEntries);
                 string opName = parts[0].ToUpper();
+
+                if (opName == ".FILL")
+                {
+                    string val = parts[1].ToUpper();
+                    if (labels.ContainsKey(val)) finalCode.Add(labels[val]); // 支援 .FILL LABEL
+                    else finalCode.Add(SafeParseUshort(val)); // 支援 .FILL 65
+                    continue;
+                }
+
                 if (!OpCodes.ContainsKey(opName)) continue;
 
                 byte op = OpCodes[opName];
@@ -151,6 +160,7 @@ namespace Assembler
             {
                 case "BRK":
                 case "RET":
+                case ".FILL":
                 case "PUSH":
                 case "POP":
                     return 1; // 僅有 (0x00 << 8 | 0)
