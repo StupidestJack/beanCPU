@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace Assembler
 {
@@ -29,13 +31,16 @@ namespace Assembler
 
         public static ushort[] Compile(string source)
         {
+            // --- 第一階段：預處理 (USING) ---
+            source = ExpandUsingAppend(source, new HashSet<string>()); // 或 ExpandUsingToFront
+
             var lines = source.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             var defines = new Dictionary<string, string>();
             var labels = new Dictionary<string, ushort>();
             var instructions = new List<string>();
             var finalCode = new List<ushort>();
 
-            // --- 第一階段：預處理 (DEFINE 與標籤清理) ---
+            // --- 第二階段：預處理 (DEFINE 與標籤清理) ---
             var preProcessed = new List<string>();
             foreach (var rawLine in lines)
             {
@@ -58,7 +63,7 @@ namespace Assembler
                 preProcessed.Add(processed);
             }
 
-            // --- 第二階段：第一輪掃描 (計算標籤位址) ---
+            // --- 第三階段：第一輪掃描 (計算標籤位址) ---
             int currentAddr = 0;
             foreach (var line in preProcessed)
             {
@@ -73,7 +78,7 @@ namespace Assembler
                 }
             }
 
-            // --- 第三階段：生成 16 位元機器碼 ---
+            // --- 第四階段：生成 16 位元機器碼 ---
             foreach (var line in instructions)
             {
                 var parts = line.Split(new[] { ' ', ',', '\t' }, StringSplitOptions.RemoveEmptyEntries);
@@ -179,6 +184,48 @@ namespace Assembler
                 default:
                     return 1;
             }
+        }
+
+        // 在 Compiler 類別中加入以下方法（取代原 ExpandUsingInline）
+        private static string ExpandUsingAppend(string source, HashSet<string> visited, string baseDirectory = null)
+        {
+            var mainBuilder = new StringBuilder();   // 主程式碼（非 USING 行）
+            var libBuilder = new StringBuilder();    // 所有被包含檔案的展開內容
+
+            var lines = source.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var rawLine in lines)
+            {
+                var line = rawLine.Trim();
+                if (line.StartsWith("USING", StringComparison.OrdinalIgnoreCase))
+                {
+                    var parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (parts.Length < 2)
+                        throw new ArgumentException("USING 必須指定檔名");
+
+                    var fileName = parts[1];
+                    string fullPath;
+                    if (Path.IsPathRooted(fileName))
+                        fullPath = fileName;
+                    else
+                        fullPath = Path.GetFullPath(Path.Combine(baseDirectory ?? Directory.GetCurrentDirectory(), fileName));
+
+                    if (visited.Contains(fullPath))
+                        continue;
+
+                    visited.Add(fullPath);
+                    var content = File.ReadAllText(fullPath);
+                    // 遞迴處理該檔案內部的 USING，並取得完整展開內容
+                    var expanded = ExpandUsingAppend(content, visited, Path.GetDirectoryName(fullPath));
+                    libBuilder.AppendLine(expanded); // 將整個檔案展開內容加入函式庫區塊
+                }
+                else
+                {
+                    mainBuilder.AppendLine(line); // 保留非 USING 行（主程式碼）
+                }
+            }
+
+            // 主程式碼在前，所有函式庫程式碼在後
+            return mainBuilder.ToString() + libBuilder.ToString();
         }
     }
 }
