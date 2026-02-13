@@ -137,7 +137,7 @@ namespace AsmEmuShort
             { Keys.U, 85 }, { Keys.V, 86 }, { Keys.W, 87 }, { Keys.X, 88 }, { Keys.Y, 89 }, { Keys.Z, 90 },
 
             // 控制鍵
-            { Keys.Enter, 13 },    // \r (回車)
+            { Keys.Enter, 10 },    // \n (換行)
             { Keys.Space, 32 },    // 空格
             { Keys.Back, 8 },      // Backspace (退格)
             { Keys.Escape, 27 },   // ESC

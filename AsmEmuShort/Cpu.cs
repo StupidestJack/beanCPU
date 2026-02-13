@@ -13,7 +13,7 @@
             public ushort pc = 0;
             public ushort sp = 0xFFFF; //stack pointer
             public bool running = false;
-            public int tick = 200;
+            public int tick = 10;
             public monitor BoundScreen = new monitor();
             private System.Text.StringBuilder ioBuffer = new System.Text.StringBuilder();
             
