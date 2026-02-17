@@ -13,20 +13,21 @@ namespace Assembler
         private static readonly Dictionary<string, byte> OpCodes = new Dictionary<string, byte>
         {
             { "BRK",       0x00 }, // 停止
-            { "MOV",       0x01 }, // reg[idx] = mem[pc++]
-            { "ADD",       0x02 }, // reg[idx] += reg[mem[pc++]]
-            { "SUB",       0x03 }, // reg[idx] -= reg[mem[pc++]]
-            { "LD",        0x04 }, // reg[idx] = mem[mem[pc++]]
-            { "ST",        0x05 }, // mem[mem[pc++]] = reg[idx] (含 MMIO 繪圖)
+            { "MOV",       0x01 }, // reg[idx2] = mem[pc++]
+            { "ADD",       0x02 }, // reg[idx2] += reg[mem[pc++]]
+            { "SUB",       0x03 }, // reg[idx2] -= reg[mem[pc++]]
+            { "LD",        0x04 }, // reg[idx2] = mem[mem[pc++]]
+            { "ST",        0x05 }, // mem[mem[pc++]] = reg[idx2] (含 MMIO 繪圖)
             { "JMP",       0x06 }, // pc = mem[pc]
             { "JZ",        0x07 }, // if (reg == 0) pc = mem[pc]
             { "PRINT_STR", 0x08 }, // 從 mem[pc++] 位址印出字串
-            { "PUSH",      0x09 }, // mem[--SP] = reg[idx]
-            { "POP",       0x0A }, // reg[idx] = mem[SP++]
+            { "PUSH",      0x09 }, // mem[--SP] = reg[idx2]
+            { "POP",       0x0A }, // reg[idx2] = mem[SP++]
             { "CALL",      0x0B }, // pc = mem[pc] mem[--SP] = pc + 2
             { "RET",       0x0C }, // pc = mem[SP++]
-            { "MUL",       0x0D }, // reg[idx] *= reg[mem[pc++]]
-            { "DIV",       0x0E }  // reg[idx] /= reg[mem[pc++]]
+            { "MUL",       0x0D }, // reg[idx2] *= reg[mem[pc++]]
+            { "DIV",       0x0E }, // reg[idx2] /= reg[mem[pc++]]
+            { "JE",        0x0F }  // if (reg1 == reg2) pc = mem[pc]
         };
 
         public static ushort[] Compile(string source)
@@ -119,6 +120,19 @@ namespace Assembler
 
                         continue; // 跳過原本的 MOV 處理
                     }
+                    // 對於JE的特殊處裡
+                    if (opName == "JE")
+                    {
+                        // 預期格式：JE R1, R2, LABEL
+                        byte r1 = byte.Parse(parts[1].ToUpper().Substring(1));
+                        byte r2 = byte.Parse(parts[2].ToUpper().Substring(1));
+                        ushort target = labels[parts[3].ToUpper()];
+
+                        // 封裝：高位 Opcode (0x0F)，低位則是 (R1 << 4) | R2
+                        finalCode.Add((ushort)((op << 8) | (r1 << 4) | r2)); //
+                        finalCode.Add(target); // 下一個位置放跳轉位址
+                        continue;
+                    }
 
                     byte.TryParse(parts[1].ToUpper().Substring(1), out regIdx);
                 }
@@ -161,6 +175,13 @@ namespace Assembler
             if (parts.Length == 0) return 0;
 
             string op = parts[0].ToUpper();
+
+            // 特殊處理：MOV 暫存器到暫存器的語法糖
+            if (op == "MOV" && parts.Length > 2 && parts[2].ToUpper().StartsWith("R"))
+            {
+                return 4; // SUB (2) + ADD (2)
+            }
+
             switch (op)
             {
                 case "BRK":
@@ -180,12 +201,12 @@ namespace Assembler
                 case "JZ":
                 case "PRINT_STR":
                 case "CALL":
+                case "JE":
                     return 2; // 操作碼 + 一個隨後的數值/位址/暫存器索引
                 default:
                     return 1;
             }
         }
-
         // 在 Compiler 類別中加入以下方法（取代原 ExpandUsingInline）
         private static string ExpandUsingAppend(string source, HashSet<string> visited, string baseDirectory = null)
         {
