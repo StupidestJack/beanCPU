@@ -218,13 +218,13 @@ namespace AsmEmuShort
             {
                 char displayChar = asciifont.ContainsKey(c) ? c : '?';
                 byte[] data = asciifont[displayChar];
-                if (c == '\n') // 換行
+                if (c == '\r') // 換行
                 {
                     x = 10;
                     y += charHeight * 2;
                     continue;
                 }
-                if (c == '\r') // 回到行首
+                if (c == '\n') // 回到行首
                 {
                     x = 10;
                     continue;
