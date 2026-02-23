@@ -103,6 +103,22 @@ namespace AsmEmuShort
                         val = mem[pc++]; // 1. 直接讀取參數並把 pc 移到下一個指令起始點
                         if (reg[idx1] == reg[idx2]) pc = val; // 2. 如果條件成立，直接覆蓋 pc
                         break; // 3. 如果條件不成立，pc 已經在正確的下一行，直接結束！
+                    case 0x10: // JNZ
+                        val = mem[pc++]; // 1. 直接讀取參數並把 pc 移到下一個指令起始點
+                        if (reg[idx2] != 0) pc = val; // 2. 如果條件成立，直接覆蓋 pc
+                        break; // 3. 如果條件不成立，pc 已經在正確的下一行，直接結束！
+                    case 0x11: // JNE
+                        val = mem[pc++];
+                        if (reg[idx1] != reg[idx2]) pc = val;
+                        break;
+                    case 0x12: // JG
+                        val = mem[pc++];
+                        if (reg[idx1] > reg[idx2]) pc = val;
+                        break;
+                    case 0x13: // JL
+                        val = mem[pc++];
+                        if (reg[idx1] < reg[idx2]) pc = val;
+                        break;
                 }
                 if (tick > 0) System.Threading.Thread.Sleep(tick);
                 else System.Threading.Thread.Yield();

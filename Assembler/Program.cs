@@ -15,6 +15,7 @@ namespace Assembler
                 return;
             }
 
+            bool throwing = false;
             string sourcePath = args[0];
             string binPath;
             if (args.Length >= 2)
@@ -24,6 +25,9 @@ namespace Assembler
             else
             {
                 binPath = sourcePath + ".bin";
+            }
+            if (args.Length >= 3) {
+                throwing = args[2] == "--throw";
             }
 
             // --- 1. 讀取現有二進位檔（大端序） ---
@@ -58,7 +62,8 @@ namespace Assembler
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"編譯失敗：{ex.Message}");
+                if (throwing) throw;
+                else Console.WriteLine($"編譯失敗：{ex.Message}");
             }
 
             // --- 3. 寫入二進位檔（大端序） ---

@@ -27,7 +27,11 @@ namespace Assembler
             { "RET",       0x0C }, // pc = mem[SP++]
             { "MUL",       0x0D }, // reg[idx2] *= reg[mem[pc++]]
             { "DIV",       0x0E }, // reg[idx2] /= reg[mem[pc++]]
-            { "JE",        0x0F }  // if (reg1 == reg2) pc = mem[pc]
+            { "JE",        0x0F }, // if (reg1 == reg2) pc = mem[pc]
+            { "JNZ",       0x10 }, // if (reg2 != 0) pc = mem[pc]
+            { "JNE",       0x11 }, // if (reg1 != reg2) pc = mem[pc]
+            { "JG",        0x12 }, // if (reg1 > reg2) pc = mem[pc]
+            { "JL",        0x13 }, // if (reg1 < reg2) pc = mem[pc]
         };
 
         public static ushort[] Compile(string source)
@@ -120,8 +124,8 @@ namespace Assembler
 
                         continue; // 跳過原本的 MOV 處理
                     }
-                    // 對於JE的特殊處裡
-                    if (opName == "JE")
+                    // 對於JE、JNE、JG、JL的特殊處裡
+                    if (opName == "JE" || opName == "JNE" || opName == "JG" || opName == "JL")
                     {
                         // 預期格式：JE R1, R2, LABEL
                         byte r1 = byte.Parse(parts[1].ToUpper().Substring(1));
@@ -156,6 +160,7 @@ namespace Assembler
                     }
                     else
                     {
+                        Console.WriteLine(p);
                         finalCode.Add(SafeParseUshort(p));
                     }
                 }
@@ -202,6 +207,10 @@ namespace Assembler
                 case "PRINT_STR":
                 case "CALL":
                 case "JE":
+                case "JNE":
+                case "JG":
+                case "JL":
+                case "JNG":
                     return 2; // 操作碼 + 一個隨後的數值/位址/暫存器索引
                 default:
                     return 1;
