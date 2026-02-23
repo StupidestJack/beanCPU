@@ -219,14 +219,37 @@ namespace Assembler
         // 在 Compiler 類別中加入以下方法（取代原 ExpandUsingInline）
         private static string ExpandUsingAppend(string source, HashSet<string> visited, string baseDirectory = null)
         {
-            var mainBuilder = new StringBuilder();   // 主程式碼（非 USING 行）
-            var libBuilder = new StringBuilder();    // 所有被包含檔案的展開內容
+            var headBuilder = new StringBuilder();   // 頭文件展開內容 ( USINGH )
+            var mainBuilder = new StringBuilder();   // 主程式碼（非 USING、USINGH 行）
+            var libBuilder = new StringBuilder();    // 所有被包含檔案的展開內容 ( USING )
 
             var lines = source.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var rawLine in lines)
             {
                 var line = rawLine.Trim();
-                if (line.StartsWith("USING", StringComparison.OrdinalIgnoreCase))
+                if (line.StartsWith("USINGH", StringComparison.OrdinalIgnoreCase))
+                {
+                    var parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (parts.Length < 2)
+                        throw new ArgumentException("USINGH 必須指定檔名");
+
+                    var fileName = parts[1];
+                    string fullPath;
+                    if (Path.IsPathRooted(fileName))
+                        fullPath = fileName;
+                    else
+                        fullPath = Path.GetFullPath(Path.Combine(baseDirectory ?? Directory.GetCurrentDirectory(), fileName));
+
+                    if (visited.Contains(fullPath))
+                        continue;
+
+                    visited.Add(fullPath);
+                    var content = File.ReadAllText(fullPath);
+                    // 遞迴處理該檔案內部的 USING，並取得完整展開內容
+                    var expanded = ExpandUsingAppend(content, visited, Path.GetDirectoryName(fullPath));
+                    headBuilder.AppendLine(expanded); // 將整個檔案展開內容加入定義庫區塊
+                }
+                else if (line.StartsWith("USING", StringComparison.OrdinalIgnoreCase))
                 {
                     var parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
                     if (parts.Length < 2)
@@ -254,8 +277,8 @@ namespace Assembler
                 }
             }
 
-            // 主程式碼在前，所有函式庫程式碼在後
-            return mainBuilder.ToString() + libBuilder.ToString();
+            // 所有定義庫程式碼在前，主程式碼在中，所有函式庫程式碼在後
+            return headBuilder.ToString() + mainBuilder.ToString() + libBuilder.ToString();
         }
     }
 }
