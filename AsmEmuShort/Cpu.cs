@@ -119,6 +119,30 @@ namespace AsmEmuShort
                         val = mem[pc++];
                         if (reg[idx1] < reg[idx2]) pc = val;
                         break;
+                    case 0x14: // INT 指令
+                        ushort interruptVector = mem[pc++];
+                        switch (interruptVector) //
+                        {
+                            case 0x10:
+                                if (reg[0] == 0x01)
+                                {
+                                    BoundScreen.RefreshScreen();
+                                }
+                                if (reg[0] == 0x02)
+                                {
+                                    BoundScreen.screenBuffer.Clear();
+                                    BoundScreen.RefreshScreen();
+                                }
+                                break;
+                            case 0x16: // 鍵盤服務
+                                if (reg[0] == 0x00)
+                                {
+                                    if (mem[0xFF11] == 0) pc -= 2; // 如果沒按鍵，就重複執行 INT 0x16 指令
+                                    else reg[0] = mem[0xFF10]; mem[0xFF11] = 0; // 否則把字元讀入 R0
+                                }
+                                break;
+                        }
+                        break;
                 }
                 if (tick > 0) System.Threading.Thread.Sleep(tick);
                 else System.Threading.Thread.Yield();

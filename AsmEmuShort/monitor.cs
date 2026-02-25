@@ -18,7 +18,7 @@ namespace AsmEmuShort
         }
 
         // 在 monitor 類別內加入
-        private List<char> screenBuffer = new List<char>();
+        public List<char> screenBuffer = new List<char>();
         private int charWidth = 6; // 5 像素寬 + 1 像素間距
         private int charHeight = 10; // 8 像素高 + 2 像素間距
         public void printString(string s)
@@ -182,19 +182,6 @@ namespace AsmEmuShort
                 }
             }
             else { screenBuffer.Add(c); }
-            // 核心修正：叫 panel1 重畫，而不是叫 Form 重畫
-            if (panel1.InvokeRequired)
-            {
-                panel1.Invoke(new Action(() => {
-                    panel1.Invalidate();
-                    panel1.Update(); // 強制立刻重畫，不准排隊
-                }));
-            }
-            else
-            {
-                panel1.Invalidate();
-                panel1.Update();
-            }
         }
 
         // printRange 也要改
@@ -205,6 +192,16 @@ namespace AsmEmuShort
                 panel1.Invalidate();
                 panel1.Update();
             }));
+        }
+        public void RefreshScreen()
+        {
+            if (panel1.InvokeRequired)
+            {
+                panel1.BeginInvoke(new Action(RefreshScreen));
+                return;
+            }
+            panel1.Invalidate(); // 針對 Panel 進行無效化
+            panel1.Update();     // 強制立刻重畫，不要等訊息隊列
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {

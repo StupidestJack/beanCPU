@@ -32,6 +32,7 @@ namespace Assembler
             { "JNE",       0x11 }, // if (reg1 != reg2) pc = mem[pc]
             { "JG",        0x12 }, // if (reg1 > reg2) pc = mem[pc]
             { "JL",        0x13 }, // if (reg1 < reg2) pc = mem[pc]
+            { "INT",       0x14 }, // 中斷服務switch case
         };
 
         public static ushort[] Compile(string source)
@@ -146,7 +147,7 @@ namespace Assembler
 
                 // 處理後續的運算元 (數值、位址或第二個暫存器索引)
                 // 豆子的架構中，ADD/SUB 的第二個參數是存放在記憶體中的「暫存器索引」
-                for (int i = (opName == "JMP" || opName == "PRINT_STR" || opName == "CALL" ? 1 : 2); i < parts.Length; i++)
+                for (int i = (opName == "JMP" || opName == "PRINT_STR" || opName == "CALL" || opName == "INT" ? 1 : 2); i < parts.Length; i++)
                 {
                     string p = parts[i].ToUpper();
                     if (p.StartsWith("R"))
@@ -211,6 +212,7 @@ namespace Assembler
                 case "JG":
                 case "JL":
                 case "JNG":
+                case "INT":
                     return 2; // 操作碼 + 一個隨後的數值/位址/暫存器索引
                 default:
                     return 1;
