@@ -161,7 +161,6 @@ namespace Assembler
                     }
                     else
                     {
-                        Console.WriteLine(p);
                         finalCode.Add(SafeParseUshort(p));
                     }
                 }
@@ -250,6 +249,7 @@ namespace Assembler
                     // 遞迴處理該檔案內部的 USING，並取得完整展開內容
                     var expanded = ExpandUsingAppend(content, visited, Path.GetDirectoryName(fullPath));
                     headBuilder.AppendLine(expanded); // 將整個檔案展開內容加入定義庫區塊
+                    Console.WriteLine($"USINGH 引用成功：{fileName}");
                 }
                 else if (line.StartsWith("USING", StringComparison.OrdinalIgnoreCase))
                 {
@@ -272,6 +272,7 @@ namespace Assembler
                     // 遞迴處理該檔案內部的 USING，並取得完整展開內容
                     var expanded = ExpandUsingAppend(content, visited, Path.GetDirectoryName(fullPath));
                     libBuilder.AppendLine(expanded); // 將整個檔案展開內容加入函式庫區塊
+                    Console.WriteLine($"USING 引用成功：{fileName}");
                 }
                 else
                 {
@@ -280,6 +281,7 @@ namespace Assembler
             }
 
             // 所有定義庫程式碼在前，主程式碼在中，所有函式庫程式碼在後
+            Console.WriteLine($"返回所有USING與USINGH");
             return headBuilder.ToString() + mainBuilder.ToString() + libBuilder.ToString();
         }
     }

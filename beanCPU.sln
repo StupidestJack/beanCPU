@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.2.11430.68
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsmEmuShort", "AsmEmuShort\AsmEmuShort.csproj", "{AEA980D7-FA76-4C27-9A9C-5BC4DF28C387}"
 EndProject
@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DE009026-1
 		dict.txt = dict.txt
 		sugar.txt = sugar.txt
 	EndProjectSection
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Tools", "Tools\Tools.pyproj", "{373D27FD-7792-4EB4-8A36-934784970D47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,8 @@ Global
 		{BEF04795-508A-4F39-8668-856D51D8A4A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEF04795-508A-4F39-8668-856D51D8A4A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEF04795-508A-4F39-8668-856D51D8A4A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{373D27FD-7792-4EB4-8A36-934784970D47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{373D27FD-7792-4EB4-8A36-934784970D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
