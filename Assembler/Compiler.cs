@@ -161,7 +161,6 @@ namespace Assembler
                     }
                     else
                     {
-                        Console.WriteLine(p);
                         finalCode.Add(SafeParseUshort(p));
                     }
                 }
